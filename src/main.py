@@ -1,12 +1,21 @@
-## Faltan importaciones
+from flask import Flask, render_template
+import mysql.connector
+from dotenv import load_dotenv
+from os import getenv
+
+load_dotenv()
 
 servidor = Flask(__name__)
 
-
 def db_conn():
-    pass
-    ## Falta la conexion a la base de datos con 
-    ## variables de entorno
+    conexion = mysql.connector.connect(
+        host = getenv("SQL_HOST"),
+        user = getenv("SQL_USER"),
+        password = getenv("SQL_PASSWORD"),
+        database = getenv("SQL_DB")
+    )
+    
+    return conexion
 
 @servidor.get("/")
 def index():
